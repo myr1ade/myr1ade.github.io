@@ -3,7 +3,7 @@
 An animated editorial portfolio: oversized type, a handwritten red signature, warm paper textures.
 Engineering meets expression.
 
-**Live site:** https://myr1ade.github.io/nyvroi.github.io/
+**Live site:** https://myr1ade.github.io/
 
 ## About
 
