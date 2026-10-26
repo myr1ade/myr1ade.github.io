@@ -125,20 +125,20 @@ export const portfolio: Portfolio = {
   identity: {
     name: "Ananya Bongale",
     firstName: "Ananya",
-    signature: "Ananya Bongale",
+    signature: "Ananya",
     title: "Robotics & Automation Student",
     tagline: "Engineering meets expression.",
   },
 
   /* ---------- The cover (hero) ---------- */
   hero: {
-    topLeftLabel: "Creative Portfolio",
-    dateLabel: "26 OCT, 2026",
+    topLeftLabel: "Vol. 01",
+    dateLabel: "Next",
     headline: "portfolio",
     bottomLabels: [
       { label: "UI/UX Design", href: "#work" },
       { label: "Robotics & Automation", href: "#education" },
-      { label: "Creative Technology", href: "#toolbox" },
+      { label: "Skill Set", href: "#toolbox" },
       { label: "Get in Touch", href: "#contact" },
     ],
   },
@@ -146,13 +146,12 @@ export const portfolio: Portfolio = {
   /* ---------- About / biography ---------- */
   about: {
     heading: "About me",
-    annotation: "the person behind the pixels",
+    annotation: "beyond the screen",
     introduction:
-      "I'm Ananya, a Robotics & Automation student interested in the intersection of technology, visual design, and creative problem-solving. I enjoy exploring how ideas can move from sketches and prototypes into interactive digital experiences and functional systems.",
+      "I have too many interests and a habit of turning curiosity into new hobbies. I enjoy digital art, design, programming, and reading. I like making things, figuring things out, and occasionally getting distracted by an entirely new interest before finishing the last one.",
     meta: [
       { label: "Program", value: "B.Tech, Robotics & Automation" },
-      { label: "Campus", value: "SIT Pune" },
-      { label: "Drawn to", value: "Design × Technology" },
+      { label: "Campus", value: "Symbiosis Institute of Technology, Pune" },
     ],
   },
 
