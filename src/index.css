@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   🎨 COLORS & FONTS — edit these to restyle the whole site.
+   Font files are imported in src/fonts.ts. If you switch to a different
+   font family here, add its import there too.
+   ========================================================================== */
+:root {
+  --paper: #e8e7df;
+  --paper-light: #f1f0e9;
+  --paper-shadow: #d7d5cc;
+  --ink: #151515;
+  --ink-soft: #383834;
+  --accent: #d83232;
+  --accent-dark: #a82127;
+  --muted: #77766f;
+  --line: rgba(21, 21, 21, 0.18);
+
+  --font-display: "Montserrat", "Arial Black", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-script: "Mrs Saint Delafield", "Allura", cursive;
+
+  --gutter: clamp(1.25rem, 5.5vw, 5.5rem);
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+  body {
+    margin: 0;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  #root { overflow-x: clip; }
+  ::selection { background: var(--accent); color: var(--paper-light); }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 1px;
+  }
+  section[id] { scroll-margin-top: 4rem; }
+}
+
+@layer components {
+  /* Reusable paper surface: warm base + faint tonal drift + fine grain. */
+  .paper {
+    background-color: var(--paper);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.08 0 0 0 0 0.08 0 0 0 0 0.07 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E"),
+      radial-gradient(120% 80% at 18% 12%, rgba(255, 255, 250, 0.55), transparent 60%),
+      radial-gradient(90% 70% at 85% 90%, rgba(170, 165, 150, 0.16), transparent 65%),
+      linear-gradient(180deg, var(--paper-light) 0%, var(--paper) 45%, var(--paper) 100%);
+    background-size: 220px 220px, 100% 100%, 100% 100%, 100% 100%;
+  }
+  .paper-dark {
+    background-color: var(--paper-shadow);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.08 0 0 0 0 0.08 0 0 0 0 0.07 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.36'/%3E%3C/svg%3E"),
+      radial-gradient(110% 80% at 80% 0%, rgba(255, 255, 250, 0.35), transparent 60%);
+    background-size: 220px 220px, 100% 100%;
+  }
+
+  .page-x {
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+  .page-w {
+    width: 100%;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Small editorial metadata */
+  .meta {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  @media (min-width: 768px) {
+    .meta { font-size: 0.75rem; }
+  }
+
+  /* Big section headings — continuation of the cover's display face */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 900;
+    letter-spacing: -0.065em;
+    line-height: 0.86;
+    color: var(--ink);
+  }
+  .display-xl { font-size: clamp(3.25rem, 11.5vw, 11rem); }
+  .display-lg { font-size: clamp(2.5rem, 7.5vw, 7.25rem); }
+  .display-md { font-size: clamp(1.75rem, 3.6vw, 3.25rem); letter-spacing: -0.05em; line-height: 0.95; }
+
+  .script {
+    font-family: var(--font-script);
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: 0;
+    line-height: 1;
+  }
+
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--ink);
+  }
+
+  /* Animated underline for links */
+  .u-link {
+    position: relative;
+    display: inline-block;
+  }
+  .u-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .u-link:hover::after,
+  .u-link:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .hairline { border-color: var(--line); }
+
+  .sr-only-focusable:not(:focus) {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+}
+
+/* ---------- Hero poster ---------- */
+@layer components {
+  #top {
+    /* Size of the giant headline. Tuned so "portfolio" spans ~90% of the page. */
+    /* one line, edge to edge (desktop, landscape tablets) */
+    --hl: clamp(4.4rem, 19.6vw, 20.5rem);
+    --sig: calc(var(--hl) * 0.41);
+  }
+  .hero-stack { display: none !important; }
+
+  /* Phones & portrait tablets: the word breaks into a stacked two-line poster */
+  @media (max-width: 640px), (max-width: 1023px) and (orientation: portrait) {
+    #top {
+      --hl: min(37vw, 30svh);
+      --sig: calc(var(--hl) * 0.33);
+    }
+    .hero-line { display: none !important; }
+    .hero-stack { display: block !important; }
+    #top .hero-signature { transform: translate(-50%, -48%) rotate(-7deg); }
+  }
+  .hero-word {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: var(--hl);
+    letter-spacing: -0.075em;
+    line-height: 0.8;
+    color: var(--ink);
+    white-space: nowrap;
+    /* negative tracking trims the box past the last letter — give it back so the word centres */
+    padding-right: 0.075em;
+  }
+  .hero-signature {
+    left: 50%;
+    top: 50%;
+    transform: translate(-47%, -46%) rotate(-5deg);
+    z-index: 2;
+    line-height: 1;
+  }
+  .hero-stack .hero-word { line-height: 0.78; }
+  .hero-stack .hero-word:first-child { text-align: left; padding-left: 0.02em; }
+  .hero-stack .hero-word:last-child { text-align: right; }
+  .hero-signature .script {
+    /* a whisper of paper around the ink keeps the red legible over black */
+    text-shadow: 0 0 0.5px var(--paper), 0 0 1px rgba(232, 231, 223, 0.35);
+  }
+}
